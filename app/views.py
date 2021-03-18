@@ -7,8 +7,10 @@ This file creates your application.
 
 from app import app
 from flask import render_template, request, redirect, url_for
-
-
+from .forms import PropForm
+import os
+from flask import render_template, request, redirect, url_for, flash, session, abort, send_from_directory
+from werkzeug.utils import secure_filename
 ###
 # Routing for your application.
 ###
@@ -24,6 +26,59 @@ def about():
     """Render the website's about page."""
     return render_template('about.html', name="Mary Jane")
 
+@app.route('/property', methods=['GET', 'POST'])
+def property():
+    """ Render the website's property form """
+    propform = PropForm()
+
+    if request.method == 'POST': 
+        if propform.validate_on_submit():
+            title = propform.title.data
+            bedrooms = propform.bedrooms.data
+            bathrooms = propform.bathrooms.data
+            location = propform.location.data
+            price = propform.price.data
+            option = propform.option.data
+            description = propform.description.data
+            photo = propform.photo.data
+
+            filename = secure_filename(photo.filename)
+            photo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+            db = connect_db()
+            cur = db.cursor()
+            cur.execute('insert into properties_table (title, bedrooms, bathrooms, location, price, option, description, photo) values (%s, %s, %s, %s, %s, %s, %s, %s)')
+            db.commit()
+            
+        flash('File Saved', 'success')
+        return redirect(url_for('properties'))
+    return render_template('propertyform.html', form=propform)
+
+def get_uploaded_images():
+    rootdir = os.getcwd()
+    photolist = []
+
+    for subdir, dirs, files in os.walk(rootdir + '/uploads'):
+        for file in files:
+            photolist += [file]
+    photolist.pop(0)
+    return photolist
+
+@app.route('/uploads/<filename>')
+def get_image(filename):
+    rootdir2 = os.getcwd()
+
+    return send_from_directory(os.path.join(rootdir2, app.config['UPLOAD_FOLDER']), filename)
+
+@app.route('/properties')
+def properties():
+    """ Render the website's properties page """
+    return render_template('properties.html')
+
+@app.route('/property/<propertyid>')
+def viewproperty():
+    """ Render the websites view property page """
+    return render_template('viewproperty.html')
 
 ###
 # The functions below should be applicable to all Flask apps.
