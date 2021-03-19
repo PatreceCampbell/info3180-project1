@@ -5,12 +5,15 @@ Werkzeug Documentation:  http://werkzeug.pocoo.org/documentation/
 This file creates your application.
 """
 
-from app import app
+from app import app, db
 from flask import render_template, request, redirect, url_for
 from .forms import PropForm
 import os
 from flask import render_template, request, redirect, url_for, flash, session, abort, send_from_directory
 from werkzeug.utils import secure_filename
+from app.models import PropertyTable
+import psycopg2
+
 ###
 # Routing for your application.
 ###
@@ -47,12 +50,16 @@ def property():
 
             db = connect_db()
             cur = db.cursor()
-            cur.execute('insert into properties_table (title, bedrooms, bathrooms, location, price, option, description, photo) values (%s, %s, %s, %s, %s, %s, %s, %s)')
+            sql="INSERT INTO properties_table (title, bedrooms, bathrooms, location, price, option, description, photo) values (%s, %s, %s, %s, %s, %s, %s, %s)"
+            cur.execute(sql,(title, bedrooms, bathrooms, location, price, option, description, filename))
             db.commit()
             
         flash('File Saved', 'success')
         return redirect(url_for('properties'))
     return render_template('propertyform.html', form=propform)
+
+def connect_db():
+    return psycopg2.connect(host="localhost",database="project1", user="project1", password="project1")
 
 def get_uploaded_images():
     rootdir = os.getcwd()
