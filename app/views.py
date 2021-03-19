@@ -80,12 +80,32 @@ def get_image(filename):
 @app.route('/properties')
 def properties():
     """ Render the website's properties page """
-    return render_template('properties.html')
+    # id = db.execute("SELECT id from properties_table")
+    # photo = db.execute("SELECT photo from properties_table")
+    # title = db.execute("SELECT title from properties_table")
+    # location = db.execute("SELECT location from properties_table")
+    # price = db.execute("SELECT price from properties_table")
+
+    db = connect_db()
+    cur = db.cursor()
+    # sql = "SELECT * from properties_table order by id"
+    # props = cur.execute(sql,(id, title, location, price, filename))
+    cur.execute("SELECT id, title, location, price, photo from properties_table order by id")
+    props = cur.fetchall()
+    
+    return render_template('properties.html', props=props)
 
 @app.route('/property/<propertyid>')
-def viewproperty():
+def viewproperty(propertyid):
     """ Render the websites view property page """
-    return render_template('viewproperty.html')
+
+    db = connect_db()
+    cur = db.cursor()
+    # view = PropertyTable.query.filter_by(id=propertyid).all
+    # cur.execute("SELECT * from properties_table")
+    # view = cur.fetchall()
+    view = PropertyTable.query.filter_by(id=propertyid).all()
+    return render_template('viewproperty.html', view=view)
 
 ###
 # The functions below should be applicable to all Flask apps.

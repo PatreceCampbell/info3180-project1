@@ -10,7 +10,7 @@ class PropertyTable(db.Model):
     bedrooms = db.Column(db.Integer)
     bathrooms = db.Column(db.Integer)
     location = db.Column(db.String(80))
-    price = db.Column(db.Integer)
+    price = db.Column(db.BigInteger) #change integer to Bigint
     option = db.Column(db.String(80))
     description = db.Column(db.String(255))
     photo = db.Column(db.String(80))

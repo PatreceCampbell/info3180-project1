@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+<div class="Card" id="CardIndi">
+    {% for prop in view %}
+    <div class="card" id="cardy">
+        <div class="image" id="image">
+            <img class="Pic" id="Pics" src="{{ url_for('get_image', filename=prop.photo)}}" />
+        </div>
+        <div class="info2" id="info">
+            <h4 class="Title">{{prop.title}}</h4>
+            <div class="Side" id="Side">
+                <p class="Price">{{"$" + prop.price|string}}</p>
+                <p class="Option">{{prop.option}}</p>
+            </div>
+            <p class="Description">{{prop.description}}</p>
+            <div class="Rooms" id="Rooms">
+                <h5 class="Bedrooms">{{prop.bedrooms|string + " Bedrooms"}}</h5>
+                <h5 class="Bathrooms">{{prop.bathrooms|string + " Bathrooms"}}</h5>
+            </div>
+            <p class="Location">{{prop.location}}</p>     
+            <button class="btn" id="btn2">Email Realtor</button>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
