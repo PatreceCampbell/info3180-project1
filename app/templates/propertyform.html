@@ -14,35 +14,36 @@
     {{form.description.label}}
     {{form.description(class="form-control")}}  
   </div>
-  <div class="row">
+  <div class="row" id="Rows">
         <div class="col">
             {{form.bedrooms.label}}
-            {{form.bedrooms(class="form-control")}}  
+            {{form.bedrooms(class="form-control", id="Column1")}}  
         </div>
         <div class="col">
             {{form.bathrooms.label}}
-            {{form.bathrooms(class="form-control")}}  
+            {{form.bathrooms(class="form-control", id="Column2")}}  
         </div>
   </div>
-  <div class="row">
+  <div class="row" id="Rows">
     <div class="col">
         {{form.price.label}}
-        {{form.price(class="form-control")}}  
+        {{form.price(class="form-control", id="Column1")}}  
       </div>
       <div class="col">
         {{form.option.label}}
-        {{form.option(class="form-control")}}  
+        {{form.option(class="form-control", id="Column2")}}  
       </div>
   </div>
-  <div class="row">
+  <div class="row" id="Rows">
     {{form.location.label}}
     {{form.location(class="form-control")}}  
   </div>
   <div class="row">
     {{form.photo.label}}
-    <!-- <input name="photo" type="file"/> -->
-    {{form.photo(class="form-control", id="photofield")}} 
+    {{form.photo(class="form-control")}} 
   </div>
-    <button type="submit" name="submit" class="btn btn-primary">Add Property</button>
+  <div class="ButtonDiv" id="ButtonDiv"> 
+    <button type="submit" name="submit" class="btn" id="btn1">Add Property</button>
+  </div> 
 </form>
 {% endblock %}

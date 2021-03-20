@@ -11,15 +11,20 @@
         <div class="info2" id="info">
             <h4 class="Title">{{prop.title}}</h4>
             <div class="Side" id="Side">
-                <p class="Price">{{"$" + prop.price|string}}</p>
+                <p class="Price">{{"$" + '{:,.0f}'.format(prop.price)|string}}</p>
                 <p class="Option">{{prop.option}}</p>
             </div>
             <p class="Description">{{prop.description}}</p>
             <div class="Rooms" id="Rooms">
+                <img class="icon" id="icon" src="/uploads/bed.png">
                 <h5 class="Bedrooms">{{prop.bedrooms|string + " Bedrooms"}}</h5>
+                <img class="icon" id="icon" src="/uploads/bath.png.crdownload">
                 <h5 class="Bathrooms">{{prop.bathrooms|string + " Bathrooms"}}</h5>
             </div>
-            <p class="Location">{{prop.location}}</p>     
+            <div class="locations" id="locations">
+                <img class="icon" id="icon" src="/uploads/locate.png">
+                <p class="Location">{{prop.location}}</p>  
+            </div>   
             <button class="btn" id="btn2">Email Realtor</button>
         </div>
     </div>

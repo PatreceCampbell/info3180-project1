@@ -1,17 +1,23 @@
 {% extends 'base.html' %}
 
-{% block main %}
-<h1 class="page-header">Properties</h1>
+{% block main%}
+<h1 class="page-header" id="head">Properties</h1>
 {% include 'flash_messages.html' %}
+
 
 <div class="Cards" id="PropList">
     {% for prop in props %}
     <div class="card" id="PropCard">
-        <img class="Pics" id="Pics" src="{{ url_for('get_image', filename=prop[4])}}" />
+        <div class="images" id="images">
+            <img class="Pics" id="Pics" src="{{ url_for('get_image', filename=prop[4])}}" />
+        </div>
         <div class="info" id="info">
             <h5 class="Title">{{prop[1]}}</h5>
-            <h5 class="Location">{{prop[2]}}</h5>
-            <h5 class="Price">{{"$" + prop[3]|string}}</h5>
+            <div class="locations" id="locations">
+                <img class="icon" id="icon" src="/uploads/locate.png">
+                <p class="Location">{{prop[2]}}</p>
+            </div> 
+            <h5 class="Price">{{"$" + '{:,.0f}'.format(prop[3])|string}}</h5>
         </div>
         <a class="btn" href="{{url_for('viewproperty', propertyid=prop[0])}}">View Property</a>
     </div>

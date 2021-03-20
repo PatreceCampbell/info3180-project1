@@ -6,14 +6,14 @@ class PropertyTable(db.Model):
     __tablename__ = 'properties_table'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    title = db.Column(db.String(80))
+    title = db.Column(db.String(150))
     bedrooms = db.Column(db.Integer)
-    bathrooms = db.Column(db.Integer)
-    location = db.Column(db.String(80))
-    price = db.Column(db.BigInteger) #change integer to Bigint
-    option = db.Column(db.String(80))
-    description = db.Column(db.String(255))
-    photo = db.Column(db.String(80))
+    bathrooms = db.Column(db.Numeric(1000,1))
+    location = db.Column(db.String(150))
+    price = db.Column(db.BigInteger) 
+    option = db.Column(db.String(150))
+    description = db.Column(db.String(1000))
+    photo = db.Column(db.String(150))
 
     def __init__(self, title, bedrooms, bathrooms, location, price, option, description, photo):
         self.title = title
