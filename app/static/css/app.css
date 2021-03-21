@@ -1,5 +1,5 @@
 nav{
-    background-color: rgb(43, 199, 247);
+    background-color: rgb(0, 197, 177);
 }
 
 body {
@@ -14,7 +14,7 @@ body {
 
 .Pic{
     width: 430px;
-    height: 477px;
+    height: 485px;
 }
 
 .Cards{
@@ -39,7 +39,7 @@ body {
 }
 
 .btn{
-    background-color: rgb(43, 199, 247);
+    background-color: rgb(0, 197, 177);
     color: white;
     padding: 10px;
 }
@@ -70,6 +70,8 @@ body {
 .Rooms h5{
     font-weight: bold;
     font-size: 17px;
+    margin-left: -15px;
+    padding: 5px;
 }
 
 .Option{
