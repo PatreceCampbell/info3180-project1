@@ -9,17 +9,17 @@
     {% for prop in props %}
     <div class="card" id="PropCard">
         <div class="images" id="images">
-            <img class="Pics" id="Pics" src="{{ url_for('get_image', filename=prop[4])}}" />
+            <img class="Pics" id="Pics" src="{{ url_for('get_image', filename=prop.photo)}}" />
         </div>
         <div class="info" id="info">
-            <h5 class="Title">{{prop[1]}}</h5>
+            <h5 class="Title">{{prop.title}}</h5>
             <div class="locations" id="locations">
                 <img class="icon" id="icon" src="/uploads/locate.png">
-                <p class="Location">{{prop[2]}}</p>
+                <p class="Location">{{prop.location}}</p>
             </div> 
-            <h5 class="Price">{{"$" + '{:,.0f}'.format(prop[3])|string}}</h5>
+            <h5 class="Price">{{"$" + '{:,.0f}'.format(prop.price)|string}}</h5>
         </div>
-        <a class="btn" href="{{url_for('viewproperty', propertyid=prop[0])}}">View Property</a>
+        <a class="btn" href="{{url_for('viewproperty', propertyid=prop.id)}}">View Property</a>
     </div>
     {% endfor %}
 </div>

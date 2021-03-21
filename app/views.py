@@ -79,20 +79,15 @@ def get_image(filename):
 @app.route('/properties')
 def properties():
     """ Render the website's properties page """
-    db = connect_db()
-    cur = db.cursor()
-    cur.execute("SELECT id, title, location, price, photo from properties_table order by id")
-    props = cur.fetchall()
     
+    props = db.session.query(PropertyTable).all()
     return render_template('properties.html', props=props)
 
 @app.route('/property/<propertyid>')
 def viewproperty(propertyid):
     """ Render the websites view property page """
 
-    db = connect_db()
-    cur = db.cursor()
-    view = PropertyTable.query.filter_by(id=propertyid).all()
+    view = db.session.query(PropertyTable).filter_by(id=propertyid).all()
     return render_template('viewproperty.html', view=view)
 
 ###
