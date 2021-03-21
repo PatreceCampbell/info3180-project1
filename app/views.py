@@ -55,8 +55,8 @@ def property():
             
         flash('Property Added!', 'success')
         return redirect(url_for('properties'))
-        else:
-            return flash_errors(propform)
+    else:
+        return flash_errors(propform)
     return render_template('propertyform.html', form=propform)
 
 def connect_db():
