@@ -6,7 +6,6 @@ This file creates your application.
 """
 
 from app import app, db
-from flask import render_template, request, redirect, url_for
 from .forms import PropForm
 import os
 from flask import render_template, request, redirect, url_for, flash, session, abort, send_from_directory
