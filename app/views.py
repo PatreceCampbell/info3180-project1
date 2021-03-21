@@ -53,8 +53,10 @@ def property():
             cur.execute(sql,(title, bedrooms, bathrooms, location, price, option, description, filename))
             db.commit()
             
-        flash('File Saved', 'success')
+        flash('Property Added!', 'success')
         return redirect(url_for('properties'))
+        else:
+            return flash_errors(propform)
     return render_template('propertyform.html', form=propform)
 
 def connect_db():
