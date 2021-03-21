@@ -50,12 +50,6 @@ def property():
             propertydb = PropertyTable(title, bedrooms, bathrooms, location, price, option, description, filename)
             db.session.add(propertydb)
             db.session.commit()
-
-            # db = connect_db()
-            # cur = db.cursor()
-            # sql="INSERT INTO properties_table (title, bedrooms, bathrooms, location, price, option, description, photo) values (%s, %s, %s, %s, %s, %s, %s, %s)"
-            # cur.execute(sql,(title, bedrooms, bathrooms, location, price, option, description, filename))
-            # db.commit()
             
             flash('Property Added!', 'success')
             return redirect(url_for('properties'))
